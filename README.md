@@ -104,6 +104,7 @@ Home (/home)         → Data & experiment
 
 ### Tools Digunakan
 
+_sebagai contoh saya menggunakan `nvme0n1` untuk SSD target, dalam kasus ini nama SSD hasil dari `lsblk` mungkin akan berbeda dengan kasus yang anda alami jadi tetap berhati-hatilah_ :
 ```bash
 lsblk
 cfdisk /dev/nvme0n1
