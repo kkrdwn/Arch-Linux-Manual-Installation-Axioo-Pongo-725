@@ -311,7 +311,7 @@ Checklist setelah boot:
 
 ---
 
-## 16. Setelah Ini (Tahap Berikutnya)
+## 16. Packages(Tahap Berikutnya)
 
 Jika tahap ini stabil, **baru masuk ke**:
 
