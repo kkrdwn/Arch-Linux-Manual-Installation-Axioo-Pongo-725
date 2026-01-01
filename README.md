@@ -4,7 +4,7 @@ Dokumen ini **bukan sekadar daftar perintah**, tetapi panduan untuk **memahami s
 
 ---
 
-## 0. Cara Membaca Dokumen Ini
+## 1. Cara Membaca Dokumen Ini
 
 Setiap tahap menjawab 3 pertanyaan:
 
@@ -16,7 +16,7 @@ Jika suatu perintah terasa panjang atau kompleks, itu disengaja—karena di situ
 
 ---
 
-## 1. Mental Model Linux (PENTING SEBELUM INSTALL)
+## 2. Mental Model Linux (PENTING SEBELUM INSTALL)
 
 Sebelum instalasi, pahami hierarki ini:
 
@@ -39,7 +39,7 @@ Desktop environment **tidak menentukan stabilitas**, hanya kenyamanan.
 
 ---
 
-## 2. Booting Arch ISO (Live Environment)
+## 3. Booting Arch ISO (Live Environment)
 
 ### Apa yang Terjadi
 
@@ -61,7 +61,7 @@ Jika ada output → **UEFI mode aktif (WAJIB)**
 
 ---
 
-## 3. Network (Agar Dokumentasi Bisa Dibaca Online)
+## 4. Network (Agar Dokumentasi Bisa Dibaca Online)
 
 ```bash
 ip link
@@ -82,7 +82,7 @@ Stabilitas jaringan di sini **tidak mempengaruhi sistem akhir**.
 
 ---
 
-## 4. Disk & Filesystem (Fondasi Jangka Panjang)
+## 5. Disk & Filesystem (Fondasi Jangka Panjang)
 
 ### Prinsip
 
@@ -116,7 +116,7 @@ cfdisk /dev/nvme0n1
 
 ---
 
-## 5. Filesystem Creation
+## 6. Filesystem Creation
 
 ### EFI
 
@@ -144,7 +144,7 @@ mount /dev/nvme0n1p1 /mnt/boot
 
 ---
 
-## 6. Base System Installation
+## 7. Base System Installation
 
 ```bash
 pacstrap /mnt base linux-lts linux-lts-headers linux-firmware intel-ucode sudo
@@ -162,7 +162,7 @@ pacstrap /mnt base linux-lts linux-lts-headers linux-firmware intel-ucode sudo
 
 ---
 
-## 7. Filesystem Table (fstab)
+## 8. Filesystem Table (fstab)
 
 ```bash
 genfstab -U /mnt >> /mnt/etc/fstab
@@ -175,7 +175,7 @@ genfstab -U /mnt >> /mnt/etc/fstab
 
 ---
 
-## 8. Chroot (Masuk ke Sistem Baru)
+## 9. Chroot (Masuk ke Sistem Baru)
 
 ```bash
 arch-chroot /mnt
@@ -188,7 +188,7 @@ Sekarang:
 
 ---
 
-## 9. Waktu, Locale, Identitas Sistem
+## 10. Waktu, Locale, Identitas Sistem
 
 ```bash
 ln -sf /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
@@ -209,8 +209,8 @@ Locale mempengaruhi:
 
 ---
 
-## 10. Hostname & Network
-
+## 11. Hostname & Network
+_sebagai contoh nama host saya menggunakan `pongo725`_ :
 ```bash
 echo "pongo725" > /etc/hostname
 ```
@@ -227,7 +227,7 @@ NetworkManager dipakai karena:
 
 ---
 
-## 11. Bootloader (GRUB)
+## 12. Bootloader (GRUB)
 
 ```bash
 pacman -S grub efibootmgr
@@ -242,7 +242,7 @@ Bootloader = **penghubung firmware ↔ kernel**
 
 ---
 
-## 12. Kernel Command Line (Stabilitas Hardware)
+## 13. Kernel Command Line (Stabilitas Hardware)
 
 Edit:
 
@@ -252,10 +252,14 @@ nano /etc/default/grub
 
 Tambahkan:
 
+_parameter yang sudah saya coba yaitu_ :
 ```text
 acpi_osi=!
 acpi_backlight=native
 acpi_enforce_resources=lax
+```
+_dan kedepannya saya akan mencoba menambahkan parameter berikut_ :
+```
 intel_pstate=active
 pcie_aspm=force
 ```
@@ -270,8 +274,9 @@ Ini **inti stabilitas Clevo**.
 
 ---
 
-## 13. User & Privilege Model
+## 14. User & Privilege Model
 
+_sebagai contoh saya menggunakan nama `clay` untuk User_
 ```bash
 useradd -m -G wheel clay
 passwd clay
@@ -289,7 +294,7 @@ Prinsip:
 
 ---
 
-## 14. Reboot & Validasi
+## 15. Reboot & Validasi
 
 ```bash
 exit
@@ -305,7 +310,7 @@ Checklist setelah boot:
 
 ---
 
-## 15. Setelah Ini (Tahap Berikutnya)
+## 16. Setelah Ini (Tahap Berikutnya)
 
 Jika tahap ini stabil, **baru masuk ke**:
 
